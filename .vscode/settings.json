@@ -1,0 +1,12 @@
+{
+	"[markdown]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.formatOnSave": false
+	},
+	"[yaml]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.formatOnSave": true
+	}
+}
