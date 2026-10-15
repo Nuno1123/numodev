@@ -129,9 +129,13 @@ numodev/
 │   │   ├── implementer.json
 │   │   └── reviewer.json
 │   ├── specs/
-│   │   ├── 00-context-cv.md
-│   │   ├── 01-architecture.md
-│   │   └── 02-components.md
+│   │   ├── portfolio-context.md
+│   │   ├── technical-architecture.md
+│   │   ├── ui-specification.md
+│   │   └── portfolio-v1/
+│   │       ├── requirements.md
+│   │       ├── design.md
+│   │       └── tasks.md
 │   ├── steering/
 │   │   ├── product.md
 │   │   ├── tech.md

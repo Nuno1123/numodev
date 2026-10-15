@@ -2,7 +2,7 @@
 
 ## 1. Objective
 
-Build a modern, minimal and responsive personal portfolio that presents the owner's professional profile, skills and experience. The portfolio must be maintainable, performant and suitable for deployment.
+Build a modern, minimal and responsive personal portfolio that presents the owner's professional profile, skills and experience. The portfolio must be maintainable, performant, suitable for deployment and architected to support future reuse as a template.
 
 ## 2. Source of truth
 
@@ -38,16 +38,22 @@ Provide a timeline that stays synchronized with the selected experience. Changin
 Use the dark, minimal visual style, animations, spacing and component behavior described in `ui-specification.md`.
 
 ### FR-6 — Responsive behavior
-The portfolio must remain usable on desktop, tablet and mobile. Do not assume the exact mobile navigation behavior: identify it as a design decision to resolve before implementing the mobile layout.
+The portfolio must remain usable on desktop, tablet and mobile.
+- Desktop: two-column layout with sidebar and main content.
+- Mobile: hamburger menu with drawer for sidebar content.
+- Breakpoints: sm (640px), md (768px), lg (1024px).
 
 ### FR-7 — Technology banner
-Include a banner stating: “Built with Kiro SDD + Next.js”.
+Include a banner stating: "Built with Kiro SDD + Next.js".
 
 ### FR-8 — Accessibility
 Interactive elements must be keyboard accessible, have appropriate accessible names and visible focus states. Respect reduced-motion preferences.
 
 ### FR-9 — Deployment readiness
-The application must be buildable and suitable for the deployment target defined in the technical architecture. Verify compatibility before implementing deployment-specific changes.
+The application must be buildable and deployable to Vercel. Verify compatibility before implementing deployment-specific changes.
+
+### FR-10 — Content–presentation separation
+All personal and professional data must be stored in a structured JSON file (`src/data/cv.json`). Components must receive data through props and must not contain hardcoded CV content. The interface must adapt to the data provided: different numbers of experiences, skills, languages or sections must render correctly without code changes.
 
 ## 4. Quality requirements
 
@@ -58,6 +64,7 @@ The application must be buildable and suitable for the deployment target defined
 - Keep changes small and reviewable.
 - Maintain responsive layouts and reasonable performance.
 - Keep personal information accurate and only display information intended for the public portfolio.
+- Validate data structure at build time via TypeScript `satisfies`. No runtime validation library in V1.
 
 ## 5. Acceptance criteria
 
@@ -66,13 +73,17 @@ The first version is acceptable when:
 2. The sidebar sections show the correct content and interaction.
 3. The experience slider and timeline stay synchronized.
 4. The intended visual style and animations are implemented.
-5. The interface works at desktop and mobile widths, after the mobile behavior is agreed.
+5. The interface works at desktop and mobile widths with the agreed responsive behavior.
 6. Keyboard interaction, focus states and reduced-motion behavior are checked.
 7. The project passes the available lint, type-check and production build checks.
 8. No unsupported personal facts have been added.
+9. All CV content comes from `cv.json`; no personal data is hardcoded in components.
+10. The interface renders correctly with different data shapes (varying numbers of entries).
 
-## 6. Open decisions
+## 6. Resolved decisions
 
-- Final mobile navigation and sidebar behavior.
-- Confirmed deployment target if the existing architecture lists multiple alternatives.
-- Any missing or ambiguous CV content required for the final interface.
+- Mobile navigation: hamburger menu with drawer.
+- Deployment target: Vercel.
+- Data format: JSON (`cv.json`) with TypeScript types and build-time validation via `satisfies`.
+- Profile photo location: `public/images/profile.png`.
+- Next.js version: 15.

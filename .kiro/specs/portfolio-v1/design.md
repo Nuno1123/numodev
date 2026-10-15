@@ -12,21 +12,31 @@ The detailed visual requirements in `../ui-specification.md` remain authoritativ
 
 ## 2. Application architecture
 
-- Use Next.js App Router and TypeScript strict mode.
+- Use Next.js 15 App Router and TypeScript strict mode.
 - Use Tailwind CSS for styling.
 - Use Lucide icons where icons are required.
 - Follow the conventions already established in the project.
 - Prefer small, focused components and avoid unnecessary dependencies.
+- Deploy to Vercel.
 
-## 3. Main layout
+## 3. Data architecture
+
+- CV content is stored in `src/data/cv.json` as structured JSON.
+- TypeScript interfaces are defined in `src/types/cv.ts`.
+- `src/data/index.ts` imports the JSON and validates it at build time using `satisfies CVData`.
+- Components receive data through props. No component may import or reference `cv.json` directly.
+- The data schema uses optional fields (`null`) to support different CV profiles without code changes.
+- Sections with empty data arrays should be hidden, not rendered as empty containers.
+
+## 4. Main layout
 
 The desktop interface contains:
 1. A sidebar with expandable information sections.
 2. A main content area containing the professional introduction and experience presentation.
 3. An experience slider coordinated with a timeline.
-4. A technology banner reading “Built with Kiro SDD + Next.js”.
+4. A technology banner reading "Built with Kiro SDD + Next.js".
 
-## 4. Sidebar
+## 5. Sidebar
 
 Sections:
 - Skills
@@ -42,7 +52,7 @@ Behavior:
 
 Use verified CV data for section content.
 
-## 5. Experience slider and timeline
+## 6. Experience slider and timeline
 
 - Display one selected experience at a time, according to the detailed UI specification.
 - Keep the selected experience and timeline indicator synchronized.
@@ -51,31 +61,39 @@ Use verified CV data for section content.
 - Use verified dates, organizations, titles and descriptions from the CV.
 - Do not invent metrics, achievements or responsibilities.
 
-## 6. Motion
+## 7. Motion
 
 - Support the fade, slide and stagger animations described in `../ui-specification.md`.
 - Keep animations subtle and consistent.
 - Respect the user's reduced-motion preference.
 - Avoid animations that block interaction or cause unnecessary layout movement.
 
-## 7. Responsive design
+## 8. Responsive design
 
 Desktop:
-- Preserve the intended sidebar and main content composition.
+- Two-column layout: fixed sidebar on the left, main content on the right.
 
-Tablet and mobile:
-- Maintain access to all sections and experience content.
-- Avoid horizontal overflow and inaccessible hover-only interactions.
-- The exact mobile sidebar/navigation transformation remains an open decision. Resolve it before implementing the final responsive navigation.
+Tablet:
+- Sidebar collapses into a hamburger-triggered drawer.
 
-## 8. Content and data
+Mobile:
+- Hamburger menu with slide-in drawer for sidebar content.
+- Drawer closes when a section is selected or the user taps outside.
+- Breakpoints: sm (640px), md (768px), lg (1024px).
 
-- Use `../portfolio-context.md` as the source of truth for personal content.
-- Separate content from presentation where this fits the existing architecture.
-- Do not duplicate CV information unnecessarily across components.
+## 9. Content and data
+
+- Use `../portfolio-context.md` as the source of truth for professional content.
+- Content is separated from presentation via `cv.json` and typed props.
+- Do not duplicate CV information across components.
 - Never create placeholder personal achievements that could be mistaken for facts.
 
-## 9. Accessibility and quality
+## 10. Asset conventions
+
+- Profile photo: `public/images/profile.png`, referenced in `cv.json` as `/images/profile.png`.
+- Future assets (favicon, open graph image) also go in `public/images/`.
+
+## 11. Accessibility and quality
 
 - Use semantic HTML.
 - Provide accessible names for interactive controls.
@@ -83,6 +101,6 @@ Tablet and mobile:
 - Test responsive states and reduced-motion behavior.
 - Reuse existing dependencies and avoid unnecessary abstractions.
 
-## 10. Implementation rule
+## 12. Implementation rule
 
 Implement only the components and behavior required by the current task. Consult the relevant sections of `../ui-specification.md` before changing visual details. If a requirement is ambiguous or conflicting, report it rather than silently inventing a solution.
