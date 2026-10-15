@@ -71,7 +71,7 @@
   - Acceptance: works with different data shapes; keyboard navigable; hover is not the only access method.
   - Files: `src/components/sidebar/AccordionSection.tsx`, `src/components/sidebar/SidebarSections.tsx`
 
-- [ ] **T2.3 — Professional introduction**
+- [x] **T2.3 — Professional introduction**
   - Display the summary from CV data via props.
   - No hardcoded text.
   - Acceptance: text matches `cv.json`.

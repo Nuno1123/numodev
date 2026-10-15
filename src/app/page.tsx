@@ -3,6 +3,7 @@ import MainContent from "@/components/layout/MainContent";
 import MobileNav from "@/components/layout/MobileNav";
 import ProfileHeader from "@/components/sidebar/ProfileHeader";
 import SidebarSections from "@/components/sidebar/SidebarSections";
+import Introduction from "@/components/main/Introduction";
 import { cv } from "@/data";
 
 function SidebarContent() {
@@ -30,12 +31,7 @@ export default function Home() {
       </Sidebar>
       <MainContent>
         <div className="space-y-8">
-          <section>
-            <h1 className="text-3xl font-bold text-foreground">
-              Introduction
-            </h1>
-            <p className="mt-2 text-muted">Main content placeholder</p>
-          </section>
+          <Introduction summary={cv.profile.summary} />
           <section>
             <h2 className="text-2xl font-semibold text-foreground">
               Experience
