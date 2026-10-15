@@ -77,7 +77,7 @@
   - Acceptance: text matches `cv.json`.
   - Files: `src/components/main/Introduction.tsx`
 
-- [ ] **T2.4 — Experience slider**
+- [x] **T2.4 — Experience slider**
   - Render N experience cards with arrow navigation and keyboard support.
   - One card visible at a time. Supports 1 to N entries.
   - Acceptance: all experiences display correct data; navigation works via keyboard, click and touch.
