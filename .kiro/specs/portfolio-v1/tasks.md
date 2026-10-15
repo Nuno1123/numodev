@@ -89,7 +89,7 @@
   - Acceptance: changing slider updates timeline and vice-versa; visual states are clear.
   - Files: `src/components/main/Timeline.tsx`
 
-- [ ] **T2.6 — Technology banner**
+- [x] **T2.6 — Technology banner**
   - Display "Built with Kiro SDD + Next.js" with a link to the repository.
   - Acceptance: banner visible, responsive, link functional.
   - Files: `src/components/main/TechBanner.tsx`

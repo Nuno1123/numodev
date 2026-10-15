@@ -5,6 +5,7 @@ import ProfileHeader from "@/components/sidebar/ProfileHeader";
 import SidebarSections from "@/components/sidebar/SidebarSections";
 import Introduction from "@/components/main/Introduction";
 import ExperienceSection from "@/components/main/ExperienceSection";
+import TechBanner from "@/components/main/TechBanner";
 import { cv } from "@/data";
 
 function SidebarContent() {
@@ -34,6 +35,7 @@ export default function Home() {
         <div className="space-y-8">
           <Introduction summary={cv.profile.summary} />
           <ExperienceSection experiences={cv.experience} />
+          <TechBanner />
         </div>
       </MainContent>
     </>
