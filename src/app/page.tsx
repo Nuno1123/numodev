@@ -2,18 +2,19 @@ import Sidebar from "@/components/layout/Sidebar";
 import MainContent from "@/components/layout/MainContent";
 import MobileNav from "@/components/layout/MobileNav";
 import ProfileHeader from "@/components/sidebar/ProfileHeader";
+import SidebarSections from "@/components/sidebar/SidebarSections";
 import { cv } from "@/data";
 
 function SidebarContent() {
   return (
     <div className="space-y-6">
       <ProfileHeader profile={cv.profile} />
-      <nav className="space-y-3">
-        <div className="h-8 rounded bg-border" />
-        <div className="h-8 rounded bg-border" />
-        <div className="h-8 rounded bg-border" />
-        <div className="h-8 rounded bg-border" />
-      </nav>
+      <SidebarSections
+        skills={cv.skills}
+        education={cv.education}
+        languages={cv.languages}
+        hobbies={cv.hobbies}
+      />
     </div>
   );
 }

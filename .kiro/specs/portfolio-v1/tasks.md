@@ -65,7 +65,7 @@
   - Acceptance: data matches CV; links functional; photo visible.
   - Files: `src/components/sidebar/ProfileHeader.tsx`
 
-- [ ] **T2.2 — Sidebar accordion**
+- [x] **T2.2 — Sidebar accordion**
   - Render N sections dynamically from data. Skills expanded by default.
   - Hover, click and keyboard interaction. Sections with empty data are hidden.
   - Acceptance: works with different data shapes; keyboard navigable; hover is not the only access method.
