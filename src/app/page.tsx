@@ -4,7 +4,7 @@ import MobileNav from "@/components/layout/MobileNav";
 import ProfileHeader from "@/components/sidebar/ProfileHeader";
 import SidebarSections from "@/components/sidebar/SidebarSections";
 import Introduction from "@/components/main/Introduction";
-import ExperienceSlider from "@/components/main/ExperienceSlider";
+import ExperienceSection from "@/components/main/ExperienceSection";
 import { cv } from "@/data";
 
 function SidebarContent() {
@@ -33,13 +33,7 @@ export default function Home() {
       <MainContent>
         <div className="space-y-8">
           <Introduction summary={cv.profile.summary} />
-          <ExperienceSlider experiences={cv.experience} />
-          <section>
-            <h2 className="text-2xl font-semibold text-foreground">
-              Timeline
-            </h2>
-            <div className="mt-4 h-12 rounded-lg bg-surface" />
-          </section>
+          <ExperienceSection experiences={cv.experience} />
         </div>
       </MainContent>
     </>

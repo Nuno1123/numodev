@@ -83,7 +83,7 @@
   - Acceptance: all experiences display correct data; navigation works via keyboard, click and touch.
   - Files: `src/components/main/ExperienceSlider.tsx`, `src/components/main/ExperienceCard.tsx`
 
-- [ ] **T2.5 — Synchronized timeline**
+- [x] **T2.5 — Synchronized timeline**
   - Timeline calculates positions from `period.start` and `period.end`.
   - Bidirectional sync with the experience slider. Adapts to N entries.
   - Acceptance: changing slider updates timeline and vice-versa; visual states are clear.
