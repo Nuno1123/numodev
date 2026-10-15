@@ -4,7 +4,7 @@ interface MainContentProps {
 
 export default function MainContent({ children }: MainContentProps) {
   return (
-    <main className="ml-80 min-h-screen p-8">
+    <main className="min-h-screen p-8 lg:ml-80">
       {children}
     </main>
   );

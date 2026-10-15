@@ -49,7 +49,7 @@
   - Acceptance: two panels visible at desktop width; no horizontal overflow.
   - Files: `src/app/page.tsx`, `src/components/layout/Sidebar.tsx`, `src/components/layout/MainContent.tsx`
 
-- [ ] **T1.2 — Responsive layout and mobile navigation**
+- [x] **T1.2 — Responsive layout and mobile navigation**
   - Implement hamburger button and slide-in drawer for sidebar on mobile/tablet.
   - Sidebar accessible at all viewport widths via keyboard and touch.
   - Drawer closes on section selection or outside tap.

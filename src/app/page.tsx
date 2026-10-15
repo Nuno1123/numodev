@@ -1,23 +1,33 @@
 import Sidebar from "@/components/layout/Sidebar";
 import MainContent from "@/components/layout/MainContent";
+import MobileNav from "@/components/layout/MobileNav";
+
+function SidebarContent() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <div className="h-20 w-20 rounded-full bg-border" />
+        <p className="text-lg font-semibold text-foreground">Profile</p>
+        <p className="text-sm text-muted">Sidebar placeholder</p>
+      </div>
+      <nav className="space-y-3">
+        <div className="h-8 rounded bg-border" />
+        <div className="h-8 rounded bg-border" />
+        <div className="h-8 rounded bg-border" />
+        <div className="h-8 rounded bg-border" />
+      </nav>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <>
+      <MobileNav>
+        <SidebarContent />
+      </MobileNav>
       <Sidebar>
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <div className="h-20 w-20 rounded-full bg-border" />
-            <p className="text-lg font-semibold text-foreground">Profile</p>
-            <p className="text-sm text-muted">Sidebar placeholder</p>
-          </div>
-          <nav className="space-y-3">
-            <div className="h-8 rounded bg-border" />
-            <div className="h-8 rounded bg-border" />
-            <div className="h-8 rounded bg-border" />
-            <div className="h-8 rounded bg-border" />
-          </nav>
-        </div>
+        <SidebarContent />
       </Sidebar>
       <MainContent>
         <div className="space-y-8">
