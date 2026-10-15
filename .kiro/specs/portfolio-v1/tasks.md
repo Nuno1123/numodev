@@ -42,7 +42,7 @@
 
 ## Phase 1 — Structural layout
 
-- [ ] **T1.1 — Application shell (two-column)**
+- [x] **T1.1 — Application shell (two-column)**
   - Implement the desktop layout: fixed sidebar on the left, scrollable main content on the right.
   - Use placeholder content to verify structure.
   - Components receive data via props; do not import CV data in layout components.
