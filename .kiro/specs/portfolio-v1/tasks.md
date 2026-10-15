@@ -59,7 +59,7 @@
 
 ## Phase 2 — Content components
 
-- [ ] **T2.1 — Profile header**
+- [x] **T2.1 — Profile header**
   - Photo via `next/image` using the path from `cv.json`, name, title, location, links.
   - All content received via props.
   - Acceptance: data matches CV; links functional; photo visible.
