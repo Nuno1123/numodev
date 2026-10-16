@@ -74,6 +74,9 @@
       "company": "Devoteam",
       "period": { "start": "2024", "end": null },
       "project": "Projeto BACO - Nova App Mobile EDP",
+      "logo": null,
+      "demoVideo": null,
+      "description": "[Placeholder] Enterprise mobile development for energy sector client.",
       "highlights": [
         "Desenvolvimento frontend em React Native integrado numa equipa multidisciplinar de +10 devs para multinacional de energia.",
         "Criação de componentes reutilizáveis, spikes técnicos para propostas de design complexas, animações fluídas e integração avançada de APIs."
@@ -84,6 +87,9 @@
       "company": "Hoopers Club",
       "period": { "start": "2021", "end": "2024" },
       "project": null,
+      "logo": null,
+      "demoVideo": null,
+      "description": "[Placeholder] Full stack mobile and web development for sports platform.",
       "highlights": [
         "Setup inicial e desenvolvimento de projeto React Native (Android/iOS), garantindo o lançamento da v1 nas lojas.",
         "Implementação de endpoints de API e arquitetura em Node/Express com base de dados PostgreSQL.",
@@ -95,6 +101,9 @@
       "company": "Elite Basketball Program",
       "period": { "start": "2014", "end": "2026" },
       "project": null,
+      "logo": null,
+      "demoVideo": null,
+      "description": "[Placeholder] Technology leadership for basketball training platform.",
       "highlights": [
         "Responsável por todas as soluções tecnológicas (arquitetura, backend e frontend).",
         "Plataforma online personalizada para testes de performance física e prescrição de treino.",

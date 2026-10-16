@@ -1,6 +1,6 @@
 # Portfolio v1 — Tasks
 
-## Phase 0 — Bootstrap and foundations
+## Phase 0 — Bootstrap and foundations (completed)
 
 - [x] **T0.1 — Initialize Next.js 15 project**
   - Run `create-next-app` with App Router, TypeScript strict, Tailwind CSS, ESLint.
@@ -40,7 +40,7 @@
   - Acceptance: no spec or steering file references a non-existent filename.
   - Files: `README.md`, `.kiro/specs/technical-architecture.md`, `.kiro/steering/product.md`
 
-## Phase 1 — Structural layout
+## Phase 1 — Structural layout (completed)
 
 - [x] **T1.1 — Application shell (two-column)**
   - Implement the desktop layout: fixed sidebar on the left, scrollable main content on the right.
@@ -57,7 +57,7 @@
   - Acceptance: sidebar functional via hamburger on mobile; keyboard accessible; no overflow.
   - Files: `src/components/layout/Sidebar.tsx`, `src/components/layout/MobileNav.tsx`
 
-## Phase 2 — Content components
+## Phase 2 — Initial content components (completed)
 
 - [x] **T2.1 — Profile header**
   - Photo via `next/image` using the path from `cv.json`, name, title, location, links.
@@ -94,46 +94,185 @@
   - Acceptance: banner visible, responsive, link functional.
   - Files: `src/components/main/TechBanner.tsx`
 
-## Phase 3 — Polish and quality
+## Phase 3 — Visual redesign foundations
 
-- [ ] **T3.1 — Entry animations**
-  - Implement fade-in, slide-up and stagger on mount.
-  - Respect `prefers-reduced-motion`.
-  - Acceptance: animations visible with motion enabled; no animation with reduced motion; no interaction blocking.
+- [x] **T3.1 — Update spec files for redesign**
+  - Update `ui-specification.md`, `design.md`, `requirements.md`, `steering/design.md` and `tasks.md` to reflect the agreed redesign.
+  - Acceptance: all spec files reflect the monochrome identity, skills interaction, flip cards, CTA card, 2D/3D toggle, frequency timeline and placeholder policy.
+  - Agent: `planner`
+  - Files: `.kiro/specs/ui-specification.md`, `.kiro/specs/portfolio-v1/design.md`, `.kiro/specs/portfolio-v1/requirements.md`, `.kiro/specs/portfolio-v1/tasks.md`, `.kiro/steering/design.md`
+
+- [x] **T3.2 — Monochrome colour tokens and Barlow Condensed font**
+  - Replace the current dark theme tokens with the monochrome palette (black sidebar, white main, dark text, accent).
+  - Add Barlow Condensed as a Google Font in `layout.tsx`. Register the font variable as a Tailwind token.
+  - Remove the `dark` class from `<html>` if no longer needed.
+  - Acceptance: sidebar renders black, main renders white. Barlow Condensed loads and renders for name/headings. `tsc`, `lint` and `build` pass.
+  - Agent: `implementer`
+  - Files: `src/app/globals.css`, `src/app/layout.tsx`
+
+- [x] **T3.3 — Extend CV data schema for redesign**
+  - Add `logo`, `demoVideo` and `description` fields to `CVExperience` (all optional/nullable).
+  - Update `cv.json` with placeholder values for each experience.
+  - Acceptance: `npx tsc --noEmit` passes. New fields present with explicit placeholders. No fabricated content.
+  - Agent: `implementer`
+  - Files: `src/types/cv.ts`, `src/data/cv.json`
+
+## Phase 4 — Sidebar and profile redesign
+
+- [ ] **T4.1 — Update layout colours**
+  - Apply black background to `Sidebar.tsx` and `MobileNav.tsx`. Apply white background to `MainContent.tsx`.
+  - Update text colours for contrast on both backgrounds.
+  - Acceptance: sidebar is black with legible light text; main is white with legible dark text. No broken contrast. Mobile drawer matches sidebar.
+  - Agent: `ui-developer`
+  - Files: `src/components/layout/Sidebar.tsx`, `src/components/layout/MainContent.tsx`, `src/components/layout/MobileNav.tsx`
+
+- [ ] **T4.2 — Update profile header**
+  - Grayscale photo treatment (CSS `filter: grayscale`). Name in Barlow Condensed, larger and more prominent.
+  - Update link styling for monochrome palette.
+  - Acceptance: photo is grayscale. Name uses condensed font. Links have sufficient contrast and visible focus.
+  - Agent: `ui-developer`
+  - Files: `src/components/sidebar/ProfileHeader.tsx`
+
+- [ ] **T4.3 — Replace skills interaction**
+  - Remove the accordion-based skills display.
+  - Implement skill items as centered text with split-text hover animation.
+  - Click/tap opens detail content; hover does not change the selected item.
+  - Prevent layout shifts from triggering adjacent items.
+  - Support keyboard and `prefers-reduced-motion`.
+  - Acceptance: skills display as centered text. Hover triggers split animation. Click opens content without accidental switching. Keyboard navigable. Animation disabled with reduced motion.
+  - Agent: `ui-developer`
+  - Files: `src/components/sidebar/SidebarSections.tsx`, `src/components/sidebar/AccordionSection.tsx` (remove or replace), new skill item component
+
+- [ ] **T4.4 — Update remaining sidebar sections**
+  - Adapt Education, Languages, Free Time to monochrome styling.
+  - Acceptance: sections display correctly on black background with appropriate contrast.
+  - Agent: `ui-developer`
+  - Files: `src/components/sidebar/SidebarSections.tsx`
+
+## Phase 5 — Employment cards and 2D mode
+
+- [ ] **T5.1 — Create flip card component**
+  - Card with front face (logo/placeholder, role, company, dates, description) and back face (video or designed fallback).
+  - CSS 3D flip (180° Y-axis) on click/keyboard activation.
+  - `prefers-reduced-motion`: flip completes instantly.
+  - Acceptance: card flips correctly. Front shows all required info. Back shows video or fallback. Accessible via keyboard.
+  - Agent: `ui-developer`
+  - Files: new `src/components/main/FlipCard.tsx`, replace `src/components/main/ExperienceCard.tsx`
+
+- [ ] **T5.2 — Create CTA card**
+  - "Hire me for my next job" card with distinct but consistent design.
+  - Placeholder destination (`#hire`) until real URLs are supplied.
+  - Not an employment entry. No fabricated dates.
+  - Acceptance: CTA card renders with clear call to action. Placeholder link works without errors. Flip behavior consistent with employment cards.
+  - Agent: `ui-developer`
+  - Files: new `src/components/main/CTACard.tsx`
+
+- [ ] **T5.3 — Replace 2D experience slider**
+  - Flat slider showing one flip card at a time with prev/next navigation.
+  - Employment cards followed by CTA card.
+  - Scoped keyboard handling (fix current global listener bug).
+  - Acceptance: navigation works via click, keyboard (scoped) and touch. CTA card appears after last employment card. Cards flip on activation.
+  - Agent: `ui-developer`
+  - Files: replace `src/components/main/ExperienceSlider.tsx`
+
+- [ ] **T5.4 — Create frequency-band timeline**
+  - Horizontal equalizer/frequency-bar style timeline.
+  - Bidirectional sync with selected employment. No marker for CTA card.
+  - CTA-to-employment navigation: timeline stays on last employment.
+  - Acceptance: timeline syncs bidirectionally. Frequency-band visual renders correctly. No CTA marker. Keyboard selectable.
+  - Agent: `ui-developer`
+  - Files: replace `src/components/main/Timeline.tsx`
+
+- [ ] **T5.5 — Update experience section wrapper**
+  - Manage shared state for slider, timeline and 2D/3D mode.
+  - Integrate flip cards, CTA card and frequency timeline.
+  - Acceptance: all sub-components synchronized. CTA card does not corrupt timeline state.
+  - Agent: `ui-developer`
+  - Files: `src/components/main/ExperienceSection.tsx`, `src/app/page.tsx`
+
+## Phase 6 — 3D carousel
+
+- [ ] **T6.1 — Create 3D perspective carousel**
+  - Perspective container with cards in a ring, rotated around Y axis.
+  - Adapted from CodePen reference (https://codepen.io/creativeocean/pen/mdROBXx) to React/Next.js.
+  - Dynamic geometry for N visual cards (employment + CTA).
+  - Drag-to-rotate with parallax-like background. Click activates flip (distinguished from drag by displacement threshold).
+  - Small card counts: 1 → centered; 2 → limited arc or 2D fallback; 3+ → full ring.
+  - `prefers-reduced-motion`: no rotation animation; navigation still functional.
+  - Acceptance: carousel renders in 3D perspective. Drag rotates. Click flips. Dynamic geometry for N cards. Reduced-motion supported.
+  - Agent: `ui-developer`
+  - Files: new `src/components/main/Carousel3D.tsx`
+
+- [ ] **T6.2 — Create 2D/3D view toggle**
+  - Toggle control to switch between flat slider and 3D carousel.
+  - Preserve selected employment across modes.
+  - Acceptance: toggle switches modes. Active card preserved. Accessible button with clear state.
+  - Agent: `ui-developer`
+  - Files: new `src/components/main/ViewToggle.tsx`, update `src/components/main/ExperienceSection.tsx`
+
+- [ ] **T6.3 — 3D timeline adaptation**
+  - Frequency timeline adapts to curved/perspective appearance in 3D mode.
+  - Acceptance: timeline visual follows carousel perspective when in 3D mode.
+  - Agent: `ui-developer`
+  - Files: update timeline component
+
+- [ ] **T6.4 — Mobile 3D behavior**
+  - Permit 3D carousel on mobile with touch drag when viewport and performance allow.
+  - Provide automatic 2D fallback when 3D is not usable (narrow viewport, reduced motion).
+  - Acceptance: 3D works on capable mobile devices. 2D fallback activates when appropriate.
+  - Agent: `ui-developer`
+  - Files: `src/components/main/ExperienceSection.tsx`, `src/components/main/Carousel3D.tsx`
+
+## Phase 7 — Polish, accessibility and verification
+
+- [ ] **T7.1 — Entry animations and reduced-motion**
+  - Fade-in, slide-up, stagger on mount for all sections.
+  - Ensure flip, carousel rotation, split-text and entry animations are all disabled when `prefers-reduced-motion` is active.
+  - Acceptance: animations work when enabled. All animations disabled with reduced motion. Interactions still functional.
+  - Agent: `ui-developer`
   - Files: multiple components
 
-- [ ] **T3.2 — Accessibility review**
-  - Check focus states, contrast (≥ 4.5:1 for text), semantic HTML, ARIA labels, full keyboard navigation.
-  - Acceptance: complete keyboard navigation; no critical contrast issues.
+- [ ] **T7.2 — Accessibility review**
+  - Focus states, contrast (WCAG AA), semantic HTML, ARIA labels, scoped keyboard navigation.
+  - Flip card, carousel, skills, timeline all keyboard accessible.
+  - No global keyboard listeners.
+  - Acceptance: complete keyboard navigation. No critical contrast issues. Scoped handlers.
+  - Agent: `reviewer` (audit), then `ui-developer` (fixes)
   - Files: multiple components
 
-- [ ] **T3.3 — Responsive review**
-  - Test at 375px, 768px, 1024px and 1440px.
+- [ ] **T7.3 — Responsive review**
+  - Test at 375px, 768px, 1024px, 1440px.
+  - Verify sidebar colour, main colour, carousel mode, timeline and card interactions at each breakpoint.
   - Acceptance: no overflow; content accessible; layout coherent at all breakpoints.
+  - Agent: `reviewer` (audit), then `ui-developer` (fixes)
   - Files: adjustments as needed
 
-- [ ] **T3.4 — Lint, type-check and build**
+- [ ] **T7.4 — Lint, type-check and build**
   - Run `npm run lint`, `npx tsc --noEmit`, `npm run build`.
   - Acceptance: no blocking errors; warnings documented.
+  - Agent: `implementer`
   - Files: none (verification only)
 
-## Phase 4 — Deploy and documentation
+## Phase 8 — Deploy and documentation
 
-- [ ] **T4.1 — Vercel deployment**
+- [ ] **T8.1 — Vercel deployment**
   - Connect GitHub repository to Vercel. Confirm build settings.
   - Acceptance: successful deploy; public site accessible.
+  - Agent: `implementer`
   - Files: `vercel.json` if needed
 
-- [ ] **T4.2 — Update README and specs**
+- [ ] **T8.2 — Update README and specs**
   - Align documentation with the implemented state.
   - Document resolved decisions and final project structure.
   - Acceptance: README reflects reality.
+  - Agent: `implementer`
   - Files: `README.md`, affected specs
 
-- [ ] **T4.3 — Final review (reviewer agent)**
+- [ ] **T8.3 — Final review**
   - Compare implementation against `requirements.md`.
   - List discrepancies.
   - Acceptance: all requirements satisfied or documented as outstanding.
+  - Agent: `reviewer`
   - Files: none (review only)
 
 ## Execution rules
@@ -146,3 +285,4 @@
 - After each task, report changed files, checks performed and outstanding issues.
 - Do not mark a task complete without verifying its acceptance criteria.
 - Components must receive data via props. Never hardcode CV content in components.
+- Use explicit, intentional placeholders for all missing assets. Never fabricate real assets.

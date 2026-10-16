@@ -26,6 +26,9 @@ export interface CVExperience {
   period: CVPeriod;
   project?: string | null;
   highlights: string[];
+  logo?: string | null;
+  demoVideo?: string | null;
+  description?: string | null;
 }
 
 export interface CVPeriod {

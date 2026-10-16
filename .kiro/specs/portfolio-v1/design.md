@@ -2,11 +2,12 @@
 
 ## 1. Design principles
 
-- Dark mode.
+- CV-inspired monochrome identity: black sidebar, white main content, dark text.
 - Minimal, polished and professional aesthetic.
-- Clear visual hierarchy and restrained use of animation.
+- Clear visual hierarchy with Barlow Condensed for prominent headings.
 - Consistent spacing, typography and component states.
 - Responsive behavior without sacrificing usability.
+- All missing assets use explicit, intentional placeholders. Never fabricate real assets.
 
 The detailed visual requirements in `../ui-specification.md` remain authoritative. Do not replace specific requirements with generic design assumptions.
 
@@ -27,80 +28,127 @@ The detailed visual requirements in `../ui-specification.md` remain authoritativ
 - Components receive data through props. No component may import or reference `cv.json` directly.
 - The data schema uses optional fields (`null`) to support different CV profiles without code changes.
 - Sections with empty data arrays should be hidden, not rendered as empty containers.
+- The CTA card ("Hire me for my next job") is presentation-only and must not be stored in CV employment data.
 
-## 4. Main layout
+## 4. Colour palette and tokens
+
+- **Sidebar background:** black (`#000000` or near-black).
+- **Main content background:** white (`#ffffff` or near-white).
+- **Text (main):** dark, high-contrast on white background.
+- **Text (sidebar):** light, high-contrast on black background.
+- **Accent:** one subtle monochromatic accent for focus indicators, active states and highlights.
+- **Surface/border:** neutral grays for cards, dividers and secondary surfaces.
+- All colours defined as CSS custom properties and registered as Tailwind theme tokens.
+- Contrast must meet WCAG AA (≥ 4.5:1 for normal text, ≥ 3:1 for large text).
+
+## 5. Typography
+
+- **Name/headings:** Barlow Condensed (Google Font).
+- **Body text:** Geist Sans (already installed) or equivalent high-legibility sans-serif.
+- **Monospace:** Geist Mono (already installed) for code-like elements.
+
+## 6. Main layout
 
 The desktop interface contains:
-1. A sidebar with expandable information sections.
-2. A main content area containing the professional introduction and experience presentation.
-3. An experience slider coordinated with a timeline.
-4. A technology banner reading "Built with Kiro SDD + Next.js".
+1. A black sidebar with profile header, skills and other sections.
+2. A white main content area with professional introduction and experience presentation.
+3. A 2D/3D toggle for the experience carousel.
+4. Employment flip cards and a CTA card in the carousel.
+5. A frequency-band timeline synchronized with the selected employment.
+6. A technology banner.
 
-## 5. Sidebar
+## 7. Sidebar
 
-Sections:
-- Skills
-- Education
-- Languages
-- Free Time
+### Profile header
+- Grayscale photo, name in Barlow Condensed (prominent), title, location, links.
 
-Behavior:
-- Skills is expanded by default.
-- Hovering over another section should follow the behavior specified in `../ui-specification.md`.
-- Define accessible click and keyboard behavior; hover must not be the only way to access content.
-- Avoid layout shifts that make navigation difficult.
+### Skills
+- Centered text items (not badges/tags).
+- Hover: split-text animation (two halves separate vertically from center).
+- Click/tap: opens detail content. Hover does not change the selected item.
+- Keyboard accessible. Reduced-motion supported.
 
-Use verified CV data for section content.
+### Other sections
+- Education, Languages, Free Time: expandable/accordion with monochrome styling.
 
-## 6. Experience slider and timeline
+## 8. Experience presentation
 
-- Display one selected experience at a time, according to the detailed UI specification.
-- Keep the selected experience and timeline indicator synchronized.
-- Provide clear visual states for the selected entry.
-- Ensure interaction works with keyboard and touch where applicable.
-- Use verified dates, organizations, titles and descriptions from the CV.
-- Do not invent metrics, achievements or responsibilities.
+### Employment cards
+- One card per real CV entry. No invented or duplicated jobs.
+- Front: company logo or placeholder, role, company, dates, description.
+- Back: demo video or designed fallback.
+- 180-degree Y-axis flip on activation.
 
-## 7. Motion
+### CTA card
+- "Hire me for my next job" — after all employment cards in both modes.
+- Not an employment entry. No fabricated dates. Not in timeline.
+- Placeholder destination until real URLs are supplied.
 
-- Support the fade, slide and stagger animations described in `../ui-specification.md`.
-- Keep animations subtle and consistent.
-- Respect the user's reduced-motion preference.
-- Avoid animations that block interaction or cause unnecessary layout movement.
+### 2D mode
+- Flat slider, one card at a time, prev/next navigation.
 
-## 8. Responsive design
+### 3D mode
+- Perspective carousel (CodePen reference: https://codepen.io/creativeocean/pen/mdROBXx).
+- Ring of panels rotated around Y axis. Drag-to-rotate. Dynamic geometry for N cards.
+- Small counts: 1 → centered; 2 → limited arc or 2D fallback; 3+ → full ring.
+
+### View toggle
+- 2D/3D switch. Preserves selected employment across modes.
+
+## 9. Timeline
+
+- Horizontal frequency/equalizer-band style.
+- Bidirectional sync with selected employment.
+- No marker for the CTA card.
+- CTA-to-employment navigation: timeline stays on last employment.
+- 3D mode: curved/perspective appearance matching carousel.
+
+## 10. Motion
+
+- Entry animations: fade-in, slide-up, stagger on mount.
+- Card flip: 180° Y-axis rotation.
+- Carousel rotation: smooth transitions.
+- Split-text hover on skills.
+- `prefers-reduced-motion`: all animations disabled; interactions remain functional.
+
+## 11. Responsive design
 
 Desktop:
-- Two-column layout: fixed sidebar on the left, main content on the right.
+- Two-column layout: black sidebar (fixed), white main content.
 
 Tablet:
-- Sidebar collapses into a hamburger-triggered drawer.
+- Sidebar collapses into hamburger-triggered drawer.
 
 Mobile:
-- Hamburger menu with slide-in drawer for sidebar content.
-- Drawer closes when a section is selected or the user taps outside.
+- Hamburger menu with slide-in drawer.
+- 3D carousel: permit when usable; 2D fallback when necessary.
 - Breakpoints: sm (640px), md (768px), lg (1024px).
 
-## 9. Content and data
+## 12. Content and data
 
 - Use `../portfolio-context.md` as the source of truth for professional content.
-- Content is separated from presentation via `cv.json` and typed props.
+- Content separated from presentation via `cv.json` and typed props.
 - Do not duplicate CV information across components.
-- Never create placeholder personal achievements that could be mistaken for facts.
+- Never create placeholder personal achievements mistaken for facts.
+- Explicit placeholders for all missing assets.
 
-## 10. Asset conventions
+## 13. Asset conventions
 
 - Profile photo: `public/images/profile.png`, referenced in `cv.json` as `/images/profile.png`.
-- Future assets (favicon, open graph image) also go in `public/images/`.
+- Company logos: `public/images/logos/` — filename referenced in `cv.json`. Placeholder if unavailable.
+- Demo videos: URL or path in `cv.json`. Fallback if unavailable.
+- Future assets (favicon, open graph image) in `public/images/`.
 
-## 11. Accessibility and quality
+## 14. Accessibility and quality
 
 - Use semantic HTML.
 - Provide accessible names for interactive controls.
-- Ensure visible keyboard focus and usable contrast.
+- Ensure visible keyboard focus with the accent colour.
+- WCAG AA contrast compliance.
 - Test responsive states and reduced-motion behavior.
+- Scoped keyboard handlers (no global listeners).
 - Reuse existing dependencies and avoid unnecessary abstractions.
 
-## 12. Implementation rule
+## 15. Implementation rule
 
 Implement only the components and behavior required by the current task. Consult the relevant sections of `../ui-specification.md` before changing visual details. If a requirement is ambiguous or conflicting, report it rather than silently inventing a solution.
