@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SkillItem from "./SkillItem";
 import AccordionSection from "./AccordionSection";
 import type {
   CVSkillCategory,
@@ -15,121 +16,108 @@ interface SidebarSectionsProps {
   hobbies: string[];
 }
 
-interface SectionConfig {
-  key: string;
-  title: string;
-  hasData: boolean;
-  content: React.ReactNode;
-}
-
 export default function SidebarSections({
   skills,
   education,
   languages,
   hobbies,
 }: SidebarSectionsProps) {
-  const [activeSection, setActiveSection] = useState("skills");
-
-  const sections: SectionConfig[] = [
-    {
-      key: "skills",
-      title: "Skills",
-      hasData: skills.length > 0,
-      content: (
-        <div className="space-y-3">
-          {skills.map((category) => (
-            <div key={category.category}>
-              <p className="text-xs font-medium uppercase tracking-wider text-muted">
-                {category.category}
-              </p>
-              <div className="mt-1 flex flex-wrap gap-1.5">
-                {category.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded bg-border px-2 py-0.5 text-xs text-foreground"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      ),
-    },
-    {
-      key: "education",
-      title: "Education",
-      hasData: education.length > 0,
-      content: (
-        <ul className="space-y-2">
-          {education.map((entry) => (
-            <li key={`${entry.institution}-${entry.period.start}`}>
-              <p className="text-sm text-foreground">{entry.degree}</p>
-              <p className="text-xs text-muted">
-                {entry.institution} · {entry.period.start}
-                {entry.period.end && entry.period.end !== entry.period.start
-                  ? `–${entry.period.end}`
-                  : ""}
-              </p>
-            </li>
-          ))}
-        </ul>
-      ),
-    },
-    {
-      key: "languages",
-      title: "Languages",
-      hasData: languages.length > 0,
-      content: (
-        <ul className="space-y-1">
-          {languages.map((lang) => (
-            <li
-              key={lang.name}
-              className="flex items-center justify-between text-sm"
-            >
-              <span className="text-foreground">{lang.name}</span>
-              <span className="text-xs text-muted">{lang.level}</span>
-            </li>
-          ))}
-        </ul>
-      ),
-    },
-    {
-      key: "freetime",
-      title: "Free Time",
-      hasData: hobbies.length > 0,
-      content: (
-        <ul className="space-y-1">
-          {hobbies.map((hobby) => (
-            <li key={hobby} className="text-sm text-foreground">
-              {hobby}
-            </li>
-          ))}
-        </ul>
-      ),
-    },
-  ];
-
-  const visibleSections = sections.filter((s) => s.hasData);
+  const [openSkill, setOpenSkill] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   return (
-    <nav aria-label="Sidebar sections" className="space-y-1">
-      {visibleSections.map((section) => (
+    <div className="space-y-6">
+      {/* Skills — centered text with split-text hover */}
+      {skills.length > 0 && (
+        <nav aria-label="Skills" className="space-y-1">
+          {skills.map((category) => (
+            <SkillItem
+              key={category.category}
+              category={category}
+              isOpen={openSkill === category.category}
+              onToggle={() =>
+                setOpenSkill((prev) =>
+                  prev === category.category ? null : category.category
+                )
+              }
+            />
+          ))}
+        </nav>
+      )}
+
+      {/* Other sections — accordion */}
+      {education.length > 0 && (
         <AccordionSection
-          key={section.key}
-          title={section.title}
-          isOpen={activeSection === section.key}
+          title="Education"
+          isOpen={activeSection === "education"}
           onClick={() =>
             setActiveSection((prev) =>
-              prev === section.key ? "" : section.key
+              prev === "education" ? null : "education"
             )
           }
-          onMouseEnter={() => setActiveSection(section.key)}
+          onMouseEnter={() => setActiveSection("education")}
         >
-          {section.content}
+          <ul className="space-y-2">
+            {education.map((entry) => (
+              <li key={`${entry.institution}-${entry.period.start}`}>
+                <p className="text-sm text-sidebar-text">{entry.degree}</p>
+                <p className="text-xs text-sidebar-muted">
+                  {entry.institution} · {entry.period.start}
+                  {entry.period.end && entry.period.end !== entry.period.start
+                    ? `–${entry.period.end}`
+                    : ""}
+                </p>
+              </li>
+            ))}
+          </ul>
         </AccordionSection>
-      ))}
-    </nav>
+      )}
+
+      {languages.length > 0 && (
+        <AccordionSection
+          title="Languages"
+          isOpen={activeSection === "languages"}
+          onClick={() =>
+            setActiveSection((prev) =>
+              prev === "languages" ? null : "languages"
+            )
+          }
+          onMouseEnter={() => setActiveSection("languages")}
+        >
+          <ul className="space-y-1">
+            {languages.map((lang) => (
+              <li
+                key={lang.name}
+                className="flex items-center justify-between text-sm"
+              >
+                <span className="text-sidebar-text">{lang.name}</span>
+                <span className="text-xs text-sidebar-muted">{lang.level}</span>
+              </li>
+            ))}
+          </ul>
+        </AccordionSection>
+      )}
+
+      {hobbies.length > 0 && (
+        <AccordionSection
+          title="Free Time"
+          isOpen={activeSection === "freetime"}
+          onClick={() =>
+            setActiveSection((prev) =>
+              prev === "freetime" ? null : "freetime"
+            )
+          }
+          onMouseEnter={() => setActiveSection("freetime")}
+        >
+          <ul className="space-y-1">
+            {hobbies.map((hobby) => (
+              <li key={hobby} className="text-sm text-sidebar-text">
+                {hobby}
+              </li>
+            ))}
+          </ul>
+        </AccordionSection>
+      )}
+    </div>
   );
 }

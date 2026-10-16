@@ -119,21 +119,21 @@
 
 ## Phase 4 — Sidebar and profile redesign
 
-- [ ] **T4.1 — Update layout colours**
+- [x] **T4.1 — Update layout colours**
   - Apply black background to `Sidebar.tsx` and `MobileNav.tsx`. Apply white background to `MainContent.tsx`.
   - Update text colours for contrast on both backgrounds.
   - Acceptance: sidebar is black with legible light text; main is white with legible dark text. No broken contrast. Mobile drawer matches sidebar.
   - Agent: `ui-developer`
   - Files: `src/components/layout/Sidebar.tsx`, `src/components/layout/MainContent.tsx`, `src/components/layout/MobileNav.tsx`
 
-- [ ] **T4.2 — Update profile header**
+- [x] **T4.2 — Update profile header**
   - Grayscale photo treatment (CSS `filter: grayscale`). Name in Barlow Condensed, larger and more prominent.
   - Update link styling for monochrome palette.
   - Acceptance: photo is grayscale. Name uses condensed font. Links have sufficient contrast and visible focus.
   - Agent: `ui-developer`
   - Files: `src/components/sidebar/ProfileHeader.tsx`
 
-- [ ] **T4.3 — Replace skills interaction**
+- [x] **T4.3 — Replace skills interaction**
   - Remove the accordion-based skills display.
   - Implement skill items as centered text with split-text hover animation.
   - Click/tap opens detail content; hover does not change the selected item.
@@ -143,7 +143,7 @@
   - Agent: `ui-developer`
   - Files: `src/components/sidebar/SidebarSections.tsx`, `src/components/sidebar/AccordionSection.tsx` (remove or replace), new skill item component
 
-- [ ] **T4.4 — Update remaining sidebar sections**
+- [x] **T4.4 — Update remaining sidebar sections**
   - Adapt Education, Languages, Free Time to monochrome styling.
   - Acceptance: sections display correctly on black background with appropriate contrast.
   - Agent: `ui-developer`

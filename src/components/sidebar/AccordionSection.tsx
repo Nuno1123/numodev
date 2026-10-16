@@ -21,7 +21,7 @@ export default function AccordionSection({
         type="button"
         onClick={onClick}
         aria-expanded={isOpen}
-        className="flex w-full items-center justify-between rounded-md px-2 py-2 text-sm font-medium text-foreground transition-colors hover:bg-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="flex w-full items-center justify-between rounded-md px-2 py-2 text-sm font-medium text-sidebar-text transition-colors hover:bg-sidebar-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
         {title}
         <ChevronDown

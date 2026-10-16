@@ -35,7 +35,7 @@ export default function MobileNav({ children }: MobileNavProps) {
         onClick={() => setIsOpen(true)}
         aria-label="Open menu"
         aria-expanded={isOpen}
-        className="fixed left-4 top-4 z-50 rounded-md bg-surface p-2 text-foreground transition-colors hover:bg-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="fixed left-4 top-4 z-50 rounded-md bg-sidebar-bg p-2 text-sidebar-text transition-colors hover:bg-sidebar-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
         <Menu size={24} aria-hidden="true" />
       </button>
@@ -54,14 +54,14 @@ export default function MobileNav({ children }: MobileNavProps) {
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
-            className="fixed left-0 top-0 z-50 h-screen w-80 overflow-y-auto bg-surface p-6"
+            className="fixed left-0 top-0 z-50 h-screen w-80 overflow-y-auto bg-sidebar-bg p-6 text-sidebar-text"
           >
             <div className="mb-6 flex justify-end">
               <button
                 type="button"
                 onClick={close}
                 aria-label="Close menu"
-                className="rounded-md p-2 text-foreground transition-colors hover:bg-border focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="rounded-md p-2 text-sidebar-text transition-colors hover:bg-sidebar-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <X size={24} aria-hidden="true" />
               </button>
