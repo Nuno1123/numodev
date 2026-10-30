@@ -33,7 +33,7 @@ export default function Home() {
       </Sidebar>
       <MainContent>
         <div className="space-y-8">
-          <Introduction summary={cv.profile.summary} />
+          <Introduction name={cv.profile.name} summary={cv.profile.summary} />
           <ExperienceSection experiences={cv.experience} />
           <TechBanner />
         </div>

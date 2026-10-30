@@ -149,6 +149,51 @@
   - Agent: `ui-developer`
   - Files: `src/components/sidebar/SidebarSections.tsx`
 
+- [x] **T4.5 — Fix profile photo shape**
+  - Replace the circular rounded photo with a vertical rectangular portrait.
+  - Remove `rounded-full`; apply appropriate aspect ratio and grayscale treatment.
+  - Acceptance: photo renders as a vertical rectangle (not circular). Grayscale preserved. Visual review in browser confirms CV-style headshot appearance.
+  - Agent: `ui-developer`
+  - Files: `src/components/sidebar/ProfileHeader.tsx`
+
+- [x] **T4.6 — Move developer name to main content area**
+  - Remove the developer name from `ProfileHeader` (sidebar).
+  - Display the name prominently at the top of the main content area, above the introduction, using Barlow Condensed (large, uppercase).
+  - Do not duplicate the name in both sidebar and main panels.
+  - Acceptance: name appears once, in the main content area. Barlow Condensed, large, prominent. Not present in the sidebar. Visual review confirms placement.
+  - Agent: `ui-developer`
+  - Depends on: T4.5
+  - Files: `src/components/sidebar/ProfileHeader.tsx`, `src/components/main/Introduction.tsx` or `src/app/page.tsx`
+
+- [x] **T4.7 — Apply split-text animation to section headings**
+  - Move the split-text hover animation from individual skill items to the section headings (Skills, Education, Languages, Free Time).
+  - All sidebar sections use the same heading style with split-text hover and click-to-expand.
+  - Remove the separate `SkillItem` component if it is fully replaced by the unified heading pattern.
+  - Acceptance: all sidebar section headings display centered text with split-text hover animation. Click expands/collapses the section. Hover does not change the open section. Keyboard accessible. Reduced motion supported. Visual review confirms animation applies to headings, not individual skill names.
+  - Agent: `ui-developer`
+  - Depends on: T4.5, T4.6
+  - Files: `src/components/sidebar/SidebarSections.tsx`, `src/components/sidebar/SkillItem.tsx` (remove or replace), `src/components/sidebar/AccordionSection.tsx` (replace)
+
+- [x] **T4.8 — Fix split-text heading readability**
+  - Ensure section headings are fully readable in the default/closed state with no clipping, overlap or visual truncation.
+  - The animation start state must render the complete, unclipped text.
+  - Acceptance: all section headings are fully legible at rest. No `clipPath` artefacts visible in the default state. Animation transitions cleanly between rest and hover states. Visual review in browser at multiple viewports confirms readability.
+  - Agent: `ui-developer`
+  - Depends on: T4.7
+  - Files: sidebar heading component(s)
+
+- [x] **T4.9 — Implement 3-layer split-text per CodePen reference**
+  - Rewrite `SplitTextSection.tsx` to match the 3-layer structure from the split-text CodePen reference (https://codepen.io/Bilal1909/pen/rNOQNVw, local copy in `references/split-text-hover-codepen-ref/`).
+  - Layer 1: top half clipped with `clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%)`, translates up on hover.
+  - Layer 2: bottom half clipped with `clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%)`, translates down on hover.
+  - Layer 3: center reveal, `scaleY(0)` at rest → `scaleY(1)` on hover, with `bg-sidebar-surface` background.
+  - Base text is transparent (provides sizing only). The two clipped halves compose the readable text at rest.
+  - Preserve click-to-expand, keyboard accessibility, `prefers-reduced-motion` and `aria-expanded`.
+  - Acceptance: section headings are fully legible at rest. On hover, top/bottom halves separate and center layer scales in. Animation matches CodePen reference visually. Keyboard focus triggers the same effect. Reduced motion disables all animation. Visual review in browser confirms the 3-layer effect.
+  - Agent: `ui-developer`
+  - Depends on: T4.8
+  - Files: `src/components/sidebar/SplitTextSection.tsx`
+
 ## Phase 5 — Employment cards and 2D mode
 
 - [ ] **T5.1 — Create flip card component**

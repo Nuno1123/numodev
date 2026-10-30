@@ -17,8 +17,8 @@ Build a modern, minimal and responsive personal portfolio that presents the owne
 ### FR-1 — Professional introduction
 The main content area must present a concise professional introduction based on the source CV.
 
-### FR-2 — Skills presentation
-Display skill items as centered text in the sidebar. On hover, animate the text with a split-text effect (two halves separate vertically). On click/tap, open detail content for the selected item. Hover must not change the open/selected item. Support keyboard interaction and `prefers-reduced-motion`.
+### FR-2 — Sidebar section headings with split-text animation
+All sidebar sections (Skills, Education, Languages, Free Time) use centered text headings with a 3-layer split-text hover animation matching the CodePen reference. On hover, the top and bottom halves separate and a center layer scales in. On click/tap, the section expands or collapses. Hover must not change the open/closed state. Support keyboard interaction and `prefers-reduced-motion`. Skill items within the expanded Skills section are normal text — not split-text.
 
 ### FR-3 — Sidebar sections
 Provide expandable sections for Education, Languages and Free Time in the sidebar, adapted to the monochrome styling. Sections with empty data are hidden.
@@ -84,7 +84,7 @@ All personal and professional data must be stored in `cv.json`. Components recei
 
 The first version is acceptable when:
 1. The monochrome visual identity is implemented (black sidebar, white main, Barlow Condensed, grayscale photo).
-2. Skills display as centered text with split-text hover animation and click-to-open content.
+2. Sidebar section headings display centered text with 3-layer split-text hover animation; click expands/collapses sections.
 3. Employment cards flip 180° with correct front/back content.
 4. The CTA card appears after employment cards and does not corrupt CV data or timeline.
 5. The 2D/3D toggle works and preserves selection.
@@ -108,3 +108,4 @@ The first version is acceptable when:
 - 3D carousel reference: https://codepen.io/creativeocean/pen/mdROBXx
 - CTA card: "Hire me for my next job", presentation-only, not in CV data.
 - Placeholders: explicit and intentional for all missing assets.
+- Split-text reference: https://codepen.io/Bilal1909/pen/rNOQNVw (3-layer effect on section headings).

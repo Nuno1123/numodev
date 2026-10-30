@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import SkillItem from "./SkillItem";
-import AccordionSection from "./AccordionSection";
+import SplitTextSection from "./SplitTextSection";
 import type {
   CVSkillCategory,
   CVEducation,
@@ -22,40 +21,47 @@ export default function SidebarSections({
   languages,
   hobbies,
 }: SidebarSectionsProps) {
-  const [openSkill, setOpenSkill] = useState<string | null>(null);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  function toggle(key: string) {
+    setOpenSection((prev) => (prev === key ? null : key));
+  }
 
   return (
-    <div className="space-y-6">
-      {/* Skills — centered text with split-text hover */}
+    <nav aria-label="Sidebar sections" className="space-y-1">
       {skills.length > 0 && (
-        <nav aria-label="Skills" className="space-y-1">
-          {skills.map((category) => (
-            <SkillItem
-              key={category.category}
-              category={category}
-              isOpen={openSkill === category.category}
-              onToggle={() =>
-                setOpenSkill((prev) =>
-                  prev === category.category ? null : category.category
-                )
-              }
-            />
-          ))}
-        </nav>
+        <SplitTextSection
+          title="Skills"
+          isOpen={openSection === "skills"}
+          onToggle={() => toggle("skills")}
+        >
+          <div className="space-y-3">
+            {skills.map((category) => (
+              <div key={category.category}>
+                <p className="text-xs font-medium uppercase tracking-wider text-sidebar-muted">
+                  {category.category}
+                </p>
+                <div className="mt-1 flex flex-wrap justify-center gap-1.5">
+                  {category.items.map((item) => (
+                    <span
+                      key={item}
+                      className="text-xs text-sidebar-text"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </SplitTextSection>
       )}
 
-      {/* Other sections — accordion */}
       {education.length > 0 && (
-        <AccordionSection
+        <SplitTextSection
           title="Education"
-          isOpen={activeSection === "education"}
-          onClick={() =>
-            setActiveSection((prev) =>
-              prev === "education" ? null : "education"
-            )
-          }
-          onMouseEnter={() => setActiveSection("education")}
+          isOpen={openSection === "education"}
+          onToggle={() => toggle("education")}
         >
           <ul className="space-y-2">
             {education.map((entry) => (
@@ -70,19 +76,14 @@ export default function SidebarSections({
               </li>
             ))}
           </ul>
-        </AccordionSection>
+        </SplitTextSection>
       )}
 
       {languages.length > 0 && (
-        <AccordionSection
+        <SplitTextSection
           title="Languages"
-          isOpen={activeSection === "languages"}
-          onClick={() =>
-            setActiveSection((prev) =>
-              prev === "languages" ? null : "languages"
-            )
-          }
-          onMouseEnter={() => setActiveSection("languages")}
+          isOpen={openSection === "languages"}
+          onToggle={() => toggle("languages")}
         >
           <ul className="space-y-1">
             {languages.map((lang) => (
@@ -95,19 +96,14 @@ export default function SidebarSections({
               </li>
             ))}
           </ul>
-        </AccordionSection>
+        </SplitTextSection>
       )}
 
       {hobbies.length > 0 && (
-        <AccordionSection
+        <SplitTextSection
           title="Free Time"
-          isOpen={activeSection === "freetime"}
-          onClick={() =>
-            setActiveSection((prev) =>
-              prev === "freetime" ? null : "freetime"
-            )
-          }
-          onMouseEnter={() => setActiveSection("freetime")}
+          isOpen={openSection === "freetime"}
+          onToggle={() => toggle("freetime")}
         >
           <ul className="space-y-1">
             {hobbies.map((hobby) => (
@@ -116,8 +112,8 @@ export default function SidebarSections({
               </li>
             ))}
           </ul>
-        </AccordionSection>
+        </SplitTextSection>
       )}
-    </div>
+    </nav>
   );
 }

@@ -50,8 +50,8 @@ The detailed visual requirements in `../ui-specification.md` remain authoritativ
 ## 6. Main layout
 
 The desktop interface contains:
-1. A black sidebar with profile header, skills and other sections.
-2. A white main content area with professional introduction and experience presentation.
+1. A black sidebar with profile photo, contact links and expandable section headings.
+2. A white main content area with the developer name (large, prominent, Barlow Condensed), professional introduction and experience presentation.
 3. A 2D/3D toggle for the experience carousel.
 4. Employment flip cards and a CTA card in the carousel.
 5. A frequency-band timeline synchronized with the selected employment.
@@ -59,17 +59,33 @@ The desktop interface contains:
 
 ## 7. Sidebar
 
-### Profile header
-- Grayscale photo, name in Barlow Condensed (prominent), title, location, links.
+### Profile photo
+- Vertical rectangular portrait (not circular), matching a CV-style headshot.
+- Grayscale treatment, consistent with the monochrome identity.
 
-### Skills
-- Centered text items (not badges/tags).
-- Hover: split-text animation (two halves separate vertically from center).
-- Click/tap: opens detail content. Hover does not change the selected item.
-- Keyboard accessible. Reduced-motion supported.
+### Contact and links
+- Title, location and contact/social links displayed below the photo.
 
-### Other sections
-- Education, Languages, Free Time: expandable/accordion with monochrome styling.
+### Developer name
+- The developer name in Barlow Condensed (large, prominent, uppercase) is placed at the top of the **main content area**, not in the sidebar. Do not duplicate the name in both panels.
+
+### Section headings with split-text animation
+- Sidebar sections are identified by headings: Skills, Education, Languages, Free Time (and any other data-driven sections).
+- **The split-text hover animation applies to these section headings**, not to individual skill names or items within sections.
+- Headings are displayed as centered text in the sidebar.
+- **Default/closed state:** headings must be fully readable with no clipping, overlap or visual truncation.
+- **Hover:** the heading uses three overlapping text layers. The first layer shows the top half (clipped), the second shows the bottom half (clipped). On hover, the top half moves up and the bottom half moves down. A third layer appears in the center via a vertical scale animation, using the sidebar surface colour as background.
+- **Click/tap:** expands or collapses the section content below the heading.
+- **Hover must not change the selected/open section.** Only click/tap opens or closes.
+- **Layout:** prevent shifts that accidentally trigger adjacent headings.
+- **Keyboard:** focusable headings, Enter/Space to toggle, arrow keys to navigate between headings.
+- **Reduced motion:** animation disabled; expand/collapse remains functional.
+- **Reference:** https://codepen.io/Bilal1909/pen/rNOQNVw (local copy in `references/split-text-hover-codepen-ref/`)
+
+### Section content
+- Skills section content: skill items displayed within the expanded section.
+- Education, Languages, Free Time: content displayed within expanded sections, adapted to monochrome styling.
+- Sections with empty data are hidden.
 
 ## 8. Experience presentation
 
@@ -108,7 +124,7 @@ The desktop interface contains:
 - Entry animations: fade-in, slide-up, stagger on mount.
 - Card flip: 180° Y-axis rotation.
 - Carousel rotation: smooth transitions.
-- Split-text hover on skills.
+- Split-text hover on section headings (3-layer effect per reference).
 - `prefers-reduced-motion`: all animations disabled; interactions remain functional.
 
 ## 11. Responsive design

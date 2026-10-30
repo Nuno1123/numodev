@@ -22,15 +22,19 @@ All missing assets, content and URLs must use explicit, visually intentional pla
 
 ### 1. Left Sidebar (Fixed, Black Background)
 
-- **Profile header:** Grayscale photo, developer name in Barlow Condensed (large, prominent), title, location and contact/social links.
-- **Skills section:** Skill items displayed as centered text (not badges or tags).
-  - **Hover:** Text animates as two horizontal halves separating vertically from a central split line.
-  - **Click/tap:** Opens detail content for that skill item.
-  - **Hover must not change the selected/open item.** Only click/tap opens or closes.
-  - **Layout:** Prevent shifts that accidentally trigger adjacent items.
-  - **Keyboard:** Focusable items, Enter/Space to open, arrow keys to navigate.
-  - **Reduced motion:** Animation disabled; open/close remains functional.
-- **Other sidebar sections:** Education, Languages, Free Time — same accordion/expandable pattern as before, adapted to monochrome styling.
+- **Profile photo:** Vertical rectangular portrait (not circular), grayscale, CV-style headshot.
+- **Contact:** Title, location and contact/social links below the photo.
+- **Developer name:** Displayed prominently at the top of the main content area (not in the sidebar). Barlow Condensed, large, uppercase.
+- **Section headings:** All sidebar sections (Skills, Education, Languages, Free Time) use centered text headings with split-text hover animation.
+  - **Default state:** Headings must be fully readable with no clipping, overlap or truncation.
+  - **Hover:** The heading uses three overlapping text layers. The first layer shows the top half (clipped), the second shows the bottom half (clipped). On hover, the top half moves up and the bottom half moves down. A third layer appears in the center via a vertical scale animation, using the sidebar surface colour as background.
+  - **Click/tap:** Expands or collapses the section content below the heading.
+  - **Hover must not change the selected/open section.** Only click/tap opens or closes.
+  - **Layout:** Prevent shifts that accidentally trigger adjacent headings.
+  - **Keyboard:** Focusable headings, Enter/Space to toggle, arrow keys to navigate.
+  - **Reduced motion:** Animation disabled; expand/collapse remains functional.
+  - **Reference:** https://codepen.io/Bilal1909/pen/rNOQNVw (local copy in `references/split-text-hover-codepen-ref/`)
+- **Section content:** Skills items, education entries, languages and hobbies displayed within expanded sections, adapted to monochrome styling. Sections with empty data are hidden.
 
 ### 2. Right Content Area (Main Panel, White Background)
 

@@ -15,15 +15,12 @@ export default function ProfileHeader({ profile }: ProfileHeaderProps) {
         <Image
           src={photo}
           alt={name}
-          width={96}
-          height={96}
-          className="rounded-full grayscale"
+          width={120}
+          height={160}
+          className="rounded-sm object-cover object-top grayscale"
           priority
         />
-        <h1 className="mt-3 font-heading text-2xl font-bold uppercase tracking-wide text-sidebar-text">
-          {name}
-        </h1>
-        <p className="text-sm text-sidebar-muted">{title}</p>
+        <p className="mt-3 text-sm text-sidebar-muted">{title}</p>
         <p className="mt-1 flex items-center gap-1 text-xs text-sidebar-muted">
           <MapPin size={14} aria-hidden="true" />
           {location}

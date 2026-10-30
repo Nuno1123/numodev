@@ -8,7 +8,7 @@
 - Respect `prefers-reduced-motion`: all animations (split-text, flip, carousel rotation, entry stagger) must be disabled.
 - Ensure keyboard navigation, visible focus states, sufficient contrast (WCAG AA) and accessible labels.
 - Desktop: two-column layout with black sidebar and white main content.
-- Sidebar: profile header, skills (centered text with split-text hover, click-to-open), Education, Languages, Free Time.
+- Sidebar: profile header, section headings with 3-layer split-text hover (Skills, Education, Languages, Free Time), click-to-expand sections.
 - Main content: introduction, 2D/3D experience carousel with flip cards, CTA card, frequency-band timeline, technology banner.
 - Mobile: hamburger menu with slide-in drawer. 3D carousel permitted when usable; 2D fallback otherwise.
 - Use explicit, intentional placeholders for all missing assets (logos, videos, URLs). Never fabricate real assets.
